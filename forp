@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do you love me, Pyae?😕</title>
+    <title>Do you love me, Pyae?😕 </title>
     <style>
         body {
             margin: 0;
@@ -35,8 +35,7 @@
             font-weight: bold;
             line-height: 1.4;
         }
-        /* Style updated to cleanly support both images or videos */
-        .theme-media {
+        .theme-image {
             width: 180px;
             height: 180px;
             object-fit: cover;
@@ -93,10 +92,8 @@
 <body>
 
     <div class="container" id="mainContainer">
-        <!-- FIXED: Replaced img with video tags for video1.mp4 -->
-        <video class="theme-media" autoplay loop muted playsinline>
-            <source src="video1.mp4" type="video/mp4">
-        </video>
+        <!-- CHANGED: Image 1 is now a shy aesthetic GIF -->
+        <img class="theme-image" src="shy" alt="Shy Art">
         <h1 id="question">Do you love me, Pyae?😕👉👈</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="sayYes()">Yes!</button>
@@ -105,11 +102,9 @@
     </div>
 
     <div class="container success-message" id="successContainer">
-        <!-- FIXED: Replaced img with video tags for video2.mp4 -->
-        <video class="theme-media" autoplay loop muted playsinline>
-            <source src="video2.mp4" type="video/mp4">
-        </video>
-        <h1>Yayyy! ❤️✨</h1>
+        <!-- CHANGED: Image 2 is now a heartwarming heart celebration GIF -->
+        <img class="theme-image" src="heart" alt="Love Heart">
+        <h1> Yayyy!  ❤️✨</h1>
     </div>
 
     <script>
@@ -168,7 +163,7 @@
         }
 
         function sayYes() {
-            // FIXED: Resets the button styles if they clicked the full-screen version
+            // FIXED: Hides the massive button element so the main message shows clearly
             yesBtn.style.display = 'none'; 
             mainContainer.style.display = 'none';
             successContainer.style.display = 'block';
