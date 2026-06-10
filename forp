@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do you love me, Pyae?😕</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff; 
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background: #fcf8f5; 
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15); 
+            max-width: 400px;
+            width: 85%;
+            position: relative;
+            z-index: 10;
+            border: 2px solid #bfa393; 
+        }
+        h1 {
+            color: #4a3b32;
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+        /* Style updated to cleanly support both images or videos */
+        .theme-media {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 3px solid #bfa393;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+            position: relative;
+            min-height: 70px;
+        }
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px; 
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+        }
+        #yesBtn {
+            background-color: #8c2727; 
+            color: #ffffff;
+            z-index: 9999; 
+        }
+        #noBtn {
+            background-color: #7a8a84; 
+            color: #ffffff;
+        }
+        .success-message {
+            display: none;
+        }
+        .success-message h1 {
+            color: #8c2727;
+        }
+        .heart {
+            position: absolute;
+            color: #8c2727;
+            font-size: 24px;
+            animation: floatUp 3s linear infinite;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.6); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <!-- FIXED: Replaced img with video tags for video1.mp4 -->
+        <video class="theme-media" autoplay loop muted playsinline>
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+        <h1 id="question">Do you love me, Pyae?😕👉👈</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="sayYes()">Yes!</button>
+            <button id="noBtn" onclick="processNoClick()">No</button>
+        </div>
+    </div>
+
+    <div class="container success-message" id="successContainer">
+        <!-- FIXED: Replaced img with video tags for video2.mp4 -->
+        <video class="theme-media" autoplay loop muted playsinline>
+            <source src="video2.mp4" type="video/mp4">
+        </video>
+        <h1>Yayyy! ❤️✨</h1>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionText = document.getElementById('question');
+        const mainContainer = document.getElementById('mainContainer');
+        const successContainer = document.getElementById('successContainer');
+
+        let clickCount = 0;
+        let yesSize = 18; 
+        let noSize = 18;  
+
+        const phrases = [
+            "Are you sure, Pyae? 🥺",
+            "Think about it again... 😭",
+            "Pleaseeeeeeeeeeee!🥺",
+            "You cannot choose this! 💔",
+            "Look behind you... just click YES! 💖"
+        ];
+
+        function processNoClick() {
+            clickCount++;
+            
+            yesSize += 30; 
+            noSize = Math.max(4, noSize - 3); 
+
+            yesBtn.style.fontSize = yesSize + 'px';
+            yesBtn.style.padding = (yesSize / 1.3) + 'px ' + (yesSize * 1.6) + 'px';
+            
+            noBtn.style.fontSize = noSize + 'px';
+            noBtn.style.padding = (noSize / 1.5) + 'px ' + (noSize * 1.5) + 'px';
+
+            if (clickCount <= phrases.length) {
+                questionText.innerHTML = phrases[clickCount - 1];
+            }
+
+            const x = (Math.random() - 0.5) * 60;
+            const y = (Math.random() - 0.5) * 60;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+            if (clickCount >= 5) {
+                yesBtn.style.position = 'fixed';
+                yesBtn.style.top = '0';
+                yesBtn.style.left = '0';
+                yesBtn.style.width = '100vw';
+                yesBtn.style.height = '100vh';
+                yesBtn.style.borderRadius = '0';
+                yesBtn.style.fontSize = '55px';
+                yesBtn.style.display = 'flex';
+                yesBtn.style.justifyContent = 'center';
+                yesBtn.style.alignItems = 'center';
+                yesBtn.innerHTML = "YES! ❤️";
+                noBtn.style.display = 'none';
+            }
+        }
+
+        function sayYes() {
+            // FIXED: Resets the button styles if they clicked the full-screen version
+            yesBtn.style.display = 'none'; 
+            mainContainer.style.display = 'none';
+            successContainer.style.display = 'block';
+            createHearts();
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 45; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 90);
+            }
+        }
+    </script>
+</body>
+</html>
