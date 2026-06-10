@@ -93,7 +93,7 @@
 
     <div class="container" id="mainContainer">
         <!-- CHANGED: Image 1 is now a shy aesthetic GIF -->
-        <img class="theme-image" src="shy.gif" alt="Shy Art">
+        <img class="theme-image" src="shy" alt="Shy Art">
         <h1 id="question">Do you love me, Pyae?😕👉👈</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="sayYes()">Yes!</button>
@@ -103,7 +103,7 @@
 
     <div class="container success-message" id="successContainer">
         <!-- CHANGED: Image 2 is now a heartwarming heart celebration GIF -->
-        <img class="theme-image" src="heart.gif" alt="Love Heart">
+        <img class="theme-image" src="heart" alt="Love Heart">
         <h1> Yayyy!  ❤️✨</h1>
     </div>
 
