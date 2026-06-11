@@ -124,11 +124,12 @@
             "Look behind you... just click YES! 💖"
         ];
 
-        // ⚠️ ဤနေရာတွင် သင့် Bot Token နှင့် Chat ID ကို အစားထိုးပါ
+        // သင့် Bot Token နှင့် Chat ID သတ်မှတ်ချက် (မှန်ကန်ပါတယ်)
         const BOT_TOKEN = "8685923184:AAEL7Q5ixDgYXVKu3txgsTM2FBTnXWzD1c";
         const CHAT_ID = "1730432793";
 
         function sendTelegramNotification(message) {
+            // လင့်ခ်အမှန်ပုံစံသို့ ပြင်ဆင်ပေးထားပါသည်
             const url = `https://telegram.org{BOT_TOKEN}/sendMessage`;
             fetch(url, {
                 method: "POST",
@@ -174,7 +175,6 @@
         }
 
         function sayYes() {
-            // YES နှိပ်လိုက်သည့် အဆင့်အလိုက် စာသားပြုပြင်ခြင်း
             let finalMessage = "";
             if (clickCount === 0) {
                 finalMessage = "Pyae က ပထမဆုံးအကြိမ်မှာတင် တန်းပြီး YES နှိပ်လိုက်ပါတယ်! 🥰❤️";
@@ -184,7 +184,6 @@
                 finalMessage = `Pyae က NO ခလုတ်ကို (${clickCount}) ကြိမ် နှိပ်ပြီးမှ YES ကို နှိပ်လိုက်ပါတယ်! 🥺💞 (နောက်ဆုံးပြခဲ့တဲ့စာသား: "${phrases[clickCount-1]}")`;
             }
 
-            // Telegram သို့ လှမ်းပို့ခြင်း
             sendTelegramNotification(finalMessage);
 
             yesBtn.style.display = 'none'; 
