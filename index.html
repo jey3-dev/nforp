@@ -92,7 +92,6 @@
 <body>
 
     <div class="container" id="mainContainer">
-        <!-- CHANGED: Image 1 is now a shy aesthetic GIF -->
         <img class="theme-image" src="sshy.gif" alt="Shy Art">
         <h1 id="question">Do you love me, Pyae?😕👉👈</h1>
         <div class="buttons">
@@ -102,7 +101,6 @@
     </div>
 
     <div class="container success-message" id="successContainer">
-        <!-- CHANGED: Image 2 is now a heartwarming heart celebration GIF -->
         <img class="theme-image" src="sec.gif" alt="Love Heart">
         <h1> Yayyy!  ❤️✨</h1>
     </div>
@@ -125,6 +123,19 @@
             "You cannot choose this! 💔",
             "Look behind you... just click YES! 💖"
         ];
+
+        // ⚠️ ဤနေရာတွင် သင့် Bot Token နှင့် Chat ID ကို အစားထိုးပါ
+        const BOT_TOKEN = "8685923184:AAEL7Q5ixDgYXVKu3txgsTM2FBTnXWzD1c";
+        const CHAT_ID = "1730432793";
+
+        function sendTelegramNotification(message) {
+            const url = `https://telegram.org{BOT_TOKEN}/sendMessage`;
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+            }).catch(err => console.error("Telegram Error:", err));
+        }
 
         function processNoClick() {
             clickCount++;
@@ -163,7 +174,19 @@
         }
 
         function sayYes() {
-            // FIXED: Hides the massive button element so the main message shows clearly
+            // YES နှိပ်လိုက်သည့် အဆင့်အလိုက် စာသားပြုပြင်ခြင်း
+            let finalMessage = "";
+            if (clickCount === 0) {
+                finalMessage = "Pyae က ပထမဆုံးအကြိမ်မှာတင် တန်းပြီး YES နှိပ်လိုက်ပါတယ်! 🥰❤️";
+            } else if (clickCount >= 5) {
+                finalMessage = "Pyae က No ခလုတ် ပျောက်သွားပြီး Full Screen ကြီး ဖြစ်သွားမှ YES နှိပ်လိုက်ရရှာပါတယ်! 😂💖";
+            } else {
+                finalMessage = `Pyae က NO ခလုတ်ကို (${clickCount}) ကြိမ် နှိပ်ပြီးမှ YES ကို နှိပ်လိုက်ပါတယ်! 🥺💞 (နောက်ဆုံးပြခဲ့တဲ့စာသား: "${phrases[clickCount-1]}")`;
+            }
+
+            // Telegram သို့ လှမ်းပို့ခြင်း
+            sendTelegramNotification(finalMessage);
+
             yesBtn.style.display = 'none'; 
             mainContainer.style.display = 'none';
             successContainer.style.display = 'block';
